@@ -102,119 +102,121 @@ function ISUICheatMenu:ObjectCheatMenu(worldobjects)
 	ISUICheatMenu.CurrentObjects(worldobjects, subMenuObject)
 end
 
-function ISUICheatMenu:createTerraformMenu(subMenu)
-	local context = self.context
-	local worldobjects = self.worldobjects
+-- 停用地形改造功能 UI_CMRB_Terrain_Terraforming
+-- function ISUICheatMenu:createTerraformMenu(subMenu)
+-- 	local context = self.context
+-- 	local worldobjects = self.worldobjects
+--
+-- 	subMenu.tickTexture = getTexture(ISUICheatMenu.MenuTexture.on)
+-- 	local TerraformOption = subMenu:addOption(getText("UI_CMRB_Terrain_Terraforming"), worldobjects)
+-- 	if CheatCoreCM.IsTerraforming then
+-- 		TerraformOption.checkMark = true
+-- 	else
+-- 		TerraformOption.checkMark = false
+-- 	end
+--
+-- 	local subMenuTerraform = subMenu:getNew(subMenu)
+-- 	context:addSubMenu(TerraformOption, subMenuTerraform)
+-- 	subMenuTerraform.tickTexture = getTexture(ISUICheatMenu.MenuTexture.on)
+--
+-- 	if CheatCoreCM.IsTerraforming then
+-- 		subMenuTerraform:addOption(getText("UI_CMRB_Terrain_TDisable"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Message_TerrainTerraforming"), "CheatCoreCM.IsTerraforming") CheatCoreCM.DoNotFill = false end)
+-- 	end
+--
+-- 	local DoNotFill = subMenuTerraform:addOption(getText("UI_CMRB_Terrain_NoFillEmpty"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Terrain_NoFillEmpty"), "CheatCoreCM.DoNotFill") end)
+-- 	if CheatCoreCM.DoNotFill then
+-- 		DoNotFill.checkMark = true
+-- 	else
+-- 		DoNotFill.checkMark = false
+-- 	end
+--
+-- 	local tileTable = {
+-- 	optionTable = {},
+-- 	subMenuTable = {},
+-- 	categoryKey = {}
+-- 	} -- creates a table of sub menus.
+--
+-- 	for _,v1 in pairs(CheatCoreCM.TerraformTiles.MenuCategories) do
+-- 		tileTable.optionTable[v1] = subMenuTerraform:addOption(v1, worldobjects)
+-- 		tileTable.subMenuTable[v1] = subMenuTerraform:getNew(subMenuTerraform)
+-- 		tileTable.categoryKey[v1] = v1
+-- 		context:addSubMenu(tileTable.optionTable[v1], tileTable.subMenuTable[v1])
+-- 	end
+--
+-- 	for _,v in pairs(CheatCoreCM.TerraformTiles.TileTypes) do
+-- 		if v["Category"] == tileTable.categoryKey[v["Category"]] then
+-- 			local ranges
+-- 			if #v["Ranges"] > 1 then
+-- 				ranges = "{"..v["Ranges"][1]..","..v["Ranges"][2].."}"
+-- 			else
+-- 				ranges = "{"..v["Ranges"][1].."}"
+-- 			end
+-- 			tileTable.subMenuTable[v["Category"]]:addOption(v["Name"], worldobjects, function() CheatCoreCM.HandleToggle(nil, nil, "CheatCoreCM.HandleCheck('CheatCoreCM.IsTerraforming', getText('UI_CMRB_Message_TerrainTerraforming'))", "CheatCoreCM.Terraform = '"..v["Tileset"].."'; CheatCoreCM.TerraformRanges = "..ranges) end)
+-- 		end
+-- 	end
+-- end
 
-	subMenu.tickTexture = getTexture(ISUICheatMenu.MenuTexture.on)
-	local TerraformOption = subMenu:addOption(getText("UI_CMRB_Terrain_Terraforming"), worldobjects)
-	if CheatCoreCM.IsTerraforming then
-		TerraformOption.checkMark = true
-	else
-		TerraformOption.checkMark = false
-	end
-
-	local subMenuTerraform = subMenu:getNew(subMenu)
-	context:addSubMenu(TerraformOption, subMenuTerraform)
-	subMenuTerraform.tickTexture = getTexture(ISUICheatMenu.MenuTexture.on)
-
-	if CheatCoreCM.IsTerraforming then
-		subMenuTerraform:addOption(getText("UI_CMRB_Terrain_TDisable"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Message_TerrainTerraforming"), "CheatCoreCM.IsTerraforming") CheatCoreCM.DoNotFill = false end)
-	end
-
-	local DoNotFill = subMenuTerraform:addOption(getText("UI_CMRB_Terrain_NoFillEmpty"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Terrain_NoFillEmpty"), "CheatCoreCM.DoNotFill") end)
-	if CheatCoreCM.DoNotFill then
-		DoNotFill.checkMark = true
-	else
-		DoNotFill.checkMark = false
-	end
-
-	local tileTable = {
-	optionTable = {},
-	subMenuTable = {},
-	categoryKey = {}
-	} -- creates a table of sub menus.
-
-	for _,v1 in pairs(CheatCoreCM.TerraformTiles.MenuCategories) do 
-		tileTable.optionTable[v1] = subMenuTerraform:addOption(v1, worldobjects)
-		tileTable.subMenuTable[v1] = subMenuTerraform:getNew(subMenuTerraform)
-		tileTable.categoryKey[v1] = v1
-		context:addSubMenu(tileTable.optionTable[v1], tileTable.subMenuTable[v1])
-	end
-
-	for _,v in pairs(CheatCoreCM.TerraformTiles.TileTypes) do
-		if v["Category"] == tileTable.categoryKey[v["Category"]] then 
-			local ranges
-			if #v["Ranges"] > 1 then
-				ranges = "{"..v["Ranges"][1]..","..v["Ranges"][2].."}"
-			else
-				ranges = "{"..v["Ranges"][1].."}"
-			end
-			tileTable.subMenuTable[v["Category"]]:addOption(v["Name"], worldobjects, function() CheatCoreCM.HandleToggle(nil, nil, "CheatCoreCM.HandleCheck('CheatCoreCM.IsTerraforming', getText('UI_CMRB_Message_TerrainTerraforming'))", "CheatCoreCM.Terraform = '"..v["Tileset"].."'; CheatCoreCM.TerraformRanges = "..ranges) end)
-		end
-	end
-end
-
-function ISUICheatMenu:createDeleteMenu(subMenu)
-	local context = self.context
-	local worldobjects = self.worldobjects
-
-	subMenu.tickTexture = getTexture(ISUICheatMenu.MenuTexture.on)
-
-	local DeletionOption = subMenu:addOption(getText("UI_CMRB_Terrain_Delete"), worldobjects)
-	 if CheatCoreCM.IsDelete then
-		DeletionOption.checkMark = true
-	else
-		DeletionOption.checkMark = false
-	end
-
-	local subMenuDeletion = subMenu:getNew(subMenu)
-	context:addSubMenu(DeletionOption, subMenuDeletion)
-	subMenuDeletion.tickTexture = getTexture(ISUICheatMenu.MenuTexture.on)
-
-	subMenuDeletion:addOption(getText("UI_CMRB_Terrain_DToggle"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Message_TerrainDelete"), "CheatCoreCM.IsDelete") end)
-
-	local DeleteWithoutWall = subMenuDeletion:addOption(getText("UI_CMRB_Terrain_DeleteWithoutWall"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Terrain_DeleteWithoutWall"), "CheatCoreCM.DeleteWithoutWall") end)
-	if CheatCoreCM.DeleteWithoutWall then
-		DeleteWithoutWall.checkMark = true
-	else
-		DeleteWithoutWall.checkMark = false
-	end
-
-	local DeleteWithoutDoorWindow = subMenuDeletion:addOption(getText("UI_CMRB_Terrain_DeleteWithoutDoorWindow"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Terrain_DeleteWithoutDoorWindow"), "CheatCoreCM.DeleteWithoutDoorWindow") end)
-	if CheatCoreCM.DeleteWithoutDoorWindow then
-		DeleteWithoutDoorWindow.checkMark = true
-	else
-		DeleteWithoutDoorWindow.checkMark = false
-	end
-
-	local DeleteWithCorpse = subMenuDeletion:addOption(getText("UI_CMRB_Terrain_DeleteWithCorpse"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Terrain_DeleteWithCorpse"), "CheatCoreCM.DeleteWithCorpse") end)
-	if CheatCoreCM.DeleteWithCorpse then
-		DeleteWithCorpse.checkMark = true
-	else
-		DeleteWithCorpse.checkMark = false
-	end
-
-	local DeleteWithZombie = subMenuDeletion:addOption(getText("UI_CMRB_Terrain_DeleteWithZombie"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Terrain_DeleteWithZombie"), "CheatCoreCM.DeleteWithZombie") end)
-	if CheatCoreCM.DeleteWithZombie then
-		DeleteWithZombie.checkMark = true
-	else
-		DeleteWithZombie.checkMark = false
-	end
-
-	 if isClient() then
-		DeleteWithZombie.notAvailable = true
-	 end
-
-	--[[ -Support Yet-
-	local DeleteWithTerrain = subMenuDeletion:addOption("UI_CMRB_Terrain_DeleteWithTerrain", worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Terrain_DeleteWithTerrain"), "CheatCoreCM.DeleteWithTerrain") end)
-	if CheatCoreCM.DeleteWithZombie then
-		DeleteWithTerrain.checkMark = true
-	else
-		DeleteWithTerrain.checkMark = false
-	end
-	--]]
-end
+-- 停用删除模式功能 UI_CMRB_Terrain_Delete
+-- function ISUICheatMenu:createDeleteMenu(subMenu)
+-- 	local context = self.context
+-- 	local worldobjects = self.worldobjects
+--
+-- 	subMenu.tickTexture = getTexture(ISUICheatMenu.MenuTexture.on)
+--
+-- 	local DeletionOption = subMenu:addOption(getText("UI_CMRB_Terrain_Delete"), worldobjects)
+-- 	 if CheatCoreCM.IsDelete then
+-- 		DeletionOption.checkMark = true
+-- 	else
+-- 		DeletionOption.checkMark = false
+-- 	end
+--
+-- 	local subMenuDeletion = subMenu:getNew(subMenu)
+-- 	context:addSubMenu(DeletionOption, subMenuDeletion)
+-- 	subMenuDeletion.tickTexture = getTexture(ISUICheatMenu.MenuTexture.on)
+--
+-- 	subMenuDeletion:addOption(getText("UI_CMRB_Terrain_DToggle"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Message_TerrainDelete"), "CheatCoreCM.IsDelete") end)
+--
+-- 	local DeleteWithoutWall = subMenuDeletion:addOption(getText("UI_CMRB_Terrain_DeleteWithoutWall"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Terrain_DeleteWithoutWall"), "CheatCoreCM.DeleteWithoutWall") end)
+-- 	if CheatCoreCM.DeleteWithoutWall then
+-- 		DeleteWithoutWall.checkMark = true
+-- 	else
+-- 		DeleteWithoutWall.checkMark = false
+-- 	end
+--
+-- 	local DeleteWithoutDoorWindow = subMenuDeletion:addOption(getText("UI_CMRB_Terrain_DeleteWithoutDoorWindow"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Terrain_DeleteWithoutDoorWindow"), "CheatCoreCM.DeleteWithoutDoorWindow") end)
+-- 	if CheatCoreCM.DeleteWithoutDoorWindow then
+-- 		DeleteWithoutDoorWindow.checkMark = true
+-- 	else
+-- 		DeleteWithoutDoorWindow.checkMark = false
+-- 	end
+--
+-- 	local DeleteWithCorpse = subMenuDeletion:addOption(getText("UI_CMRB_Terrain_DeleteWithCorpse"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Terrain_DeleteWithCorpse"), "CheatCoreCM.DeleteWithCorpse") end)
+-- 	if CheatCoreCM.DeleteWithCorpse then
+-- 		DeleteWithCorpse.checkMark = true
+-- 	else
+-- 		DeleteWithCorpse.checkMark = false
+-- 	end
+--
+-- 	local DeleteWithZombie = subMenuDeletion:addOption(getText("UI_CMRB_Terrain_DeleteWithZombie"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Terrain_DeleteWithZombie"), "CheatCoreCM.DeleteWithZombie") end)
+-- 	if CheatCoreCM.DeleteWithZombie then
+-- 		DeleteWithZombie.checkMark = true
+-- 	else
+-- 		DeleteWithZombie.checkMark = false
+-- 	end
+--
+-- 	 if isClient() then
+-- 		DeleteWithZombie.notAvailable = true
+-- 	 end
+--
+-- 	--[[ -Support Yet-
+-- 	local DeleteWithTerrain = subMenuDeletion:addOption("UI_CMRB_Terrain_DeleteWithTerrain", worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Terrain_DeleteWithTerrain"), "CheatCoreCM.DeleteWithTerrain") end)
+-- 	if CheatCoreCM.DeleteWithZombie then
+-- 		DeleteWithTerrain.checkMark = true
+-- 	else
+-- 		DeleteWithTerrain.checkMark = false
+-- 	end
+-- 	--]]
+-- end
 
 function ISUICheatMenu:createBarricadeMenu(subMenu)
 	local context = self.context
@@ -344,35 +346,39 @@ function ISUICheatMenu:createTimeMenu(subMenu)
 		NotSupported.notAvailable = true
 		NotSupported.tooltip = getText("UI_CMRB_Tooltip_NotSupported")
 	else
-		subMenuTime:addOption(getText("UI_CMRB_Utility_TimeWarp"), worldobjects, function() ISUICheatMenu.TimeWindowCheck() end);
-		subMenuTime:addOption(getText("UI_CMRB_Utility_SurvivalTime"), worldobjects, function()
-			local inputUI = ISUIGenericWindow:checkExists(getText("UI_CMRB_Utility_SurvivalTimeEdit"), "SurvivalHours", function(val)
-				local hours = tonumber(val)
-				if hours and hours >= 0 then
-					getPlayer():setHoursSurvived(hours)
-					getPlayer():Say(getText("UI_CMRB_Utility_SurvivalTimeSet_1") .. val .. getText("UI_CMRB_Utility_SurvivalTimeSet_2"))
-				else
-					getPlayer():Say(getText("UI_CMRB_Utility_SurvivalTimeInvalidInput"))
-				end
-			end, nil)
-			inputUI:setVisible(true)
-		end);
-		local TimeFreeze = subMenuTime:addOption(getText("UI_CMRB_Utility_TimeFreeze"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Utility_TimeFreeze"), "CheatCoreCM.IsFreezeTime") end);
-		if CheatCoreCM.IsFreezeTime then
-			TimeFreeze.checkMark = true
-		else
-			TimeFreeze.checkMark = false
-		end
+		-- 停用时间修改功能 UI_CMRB_Utility_TimeWarp
+		-- subMenuTime:addOption(getText("UI_CMRB_Utility_TimeWarp"), worldobjects, function() ISUICheatMenu.TimeWindowCheck() end);
+		-- 停用生存时间修改功能 UI_CMRB_Utility_SurvivalTime
+		-- subMenuTime:addOption(getText("UI_CMRB_Utility_SurvivalTime"), worldobjects, function()
+		-- 	local inputUI = ISUIGenericWindow:checkExists(getText("UI_CMRB_Utility_SurvivalTimeEdit"), "SurvivalHours", function(val)
+		-- 		local hours = tonumber(val)
+		-- 		if hours and hours >= 0 then
+		-- 			getPlayer():setHoursSurvived(hours)
+		-- 			getPlayer():Say(getText("UI_CMRB_Utility_SurvivalTimeSet_1") .. val .. getText("UI_CMRB_Utility_SurvivalTimeSet_2"))
+		-- 		else
+		-- 			getPlayer():Say(getText("UI_CMRB_Utility_SurvivalTimeInvalidInput"))
+		-- 		end
+		-- 	end, nil)
+		-- 	inputUI:setVisible(true)
+		-- end);
+		-- 停用时间冻结功能 UI_CMRB_Utility_TimeFreeze
+		-- local TimeFreeze = subMenuTime:addOption(getText("UI_CMRB_Utility_TimeFreeze"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Utility_TimeFreeze"), "CheatCoreCM.IsFreezeTime") end);
+		-- if CheatCoreCM.IsFreezeTime then
+		-- 	TimeFreeze.checkMark = true
+		-- else
+		-- 	TimeFreeze.checkMark = false
+		-- end
 	end
 end
 
-function ISUICheatMenu.TimeWindowCheck()
-	if TimesWindow.IDs == nil then
-		TimesWindow.makeWindow()
-	else
-		getPlayer():Say(getText("UI_CMRB_Message_AlreadyExistWindow"))
-	end
-end
+-- 停用时间修改功能 UI_CMRB_Utility_TimeWarp
+-- function ISUICheatMenu.TimeWindowCheck()
+-- 	if TimesWindow.IDs == nil then
+-- 		TimesWindow.makeWindow()
+-- 	else
+-- 		getPlayer():Say(getText("UI_CMRB_Message_AlreadyExistWindow"))
+-- 	end
+-- end
 
 function ISUICheatMenu:createZombieMenu(subMenu)
 	local context = self.context
@@ -957,12 +963,13 @@ function ISUICheatMenu:UtilityCheatMenu()
 
 	---@diagnostic disable-next-line: undefined-field
 	subMenuUtility:addOption(getText("UI_CMRB_Utility_LuaEditor"), worldobjects, function() ISUILuaWindow.SetupBar() end);
-	local Fly = subMenuUtility:addOption(getText("UI_CMRB_Utility_Fly"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Utility_Fly_Message"), "CheatCoreCM.IsFly") end);
-		if CheatCoreCM.IsFly then
-			Fly.checkMark = true
-		else
-			Fly.checkMark = false
-		end
+	-- 停用飞行功能 UI_CMRB_Utility_Fly
+	-- local Fly = subMenuUtility:addOption(getText("UI_CMRB_Utility_Fly"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Utility_Fly_Message"), "CheatCoreCM.IsFly") end);
+	-- 	if CheatCoreCM.IsFly then
+	-- 		Fly.checkMark = true
+	-- 	else
+	-- 		Fly.checkMark = false
+	-- 	end
 end
 
 function ISUICheatMenu:TerrainCheatMenu()
@@ -974,9 +981,11 @@ function ISUICheatMenu:TerrainCheatMenu()
 	local subMenuTerrain = subMenu:getNew(subMenu);
 	context:addSubMenu(TerrainCheatOption, subMenuTerrain);
 	subMenuTerrain.tickTexture = getTexture(ISUICheatMenu.MenuTexture.on)
-	ISUICheatMenu:createTerraformMenu(subMenuTerrain)
+	-- 停用地形改造功能 UI_CMRB_Terrain_Terraforming
+	-- ISUICheatMenu:createTerraformMenu(subMenuTerrain)
 
-	ISUICheatMenu:createDeleteMenu(subMenuTerrain)
+	-- 停用删除模式功能 UI_CMRB_Terrain_Delete
+	-- ISUICheatMenu:createDeleteMenu(subMenuTerrain)
 
 	local FireBrush = subMenuTerrain:addOption(getText("UI_CMRB_Terrain_Fire"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Terrain_Fire_Message"), "CheatCoreCM.FireBrushEnabled") end);
 	if CheatCoreCM.FireBrushEnabled then

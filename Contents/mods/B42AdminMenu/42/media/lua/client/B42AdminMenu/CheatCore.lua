@@ -251,139 +251,141 @@ function CheatCoreCM.OnKeyKeepPressed(_keyPressed)
 		end
 	end
 
-	if CheatCoreCM.IsDelete == true and _keyPressed == 45 then
-		local sq, _, objTbl = CheatCoreCM.getSqObjs()
+	-- 停用删除模式功能 UI_CMRB_Terrain_Delete
+	-- if CheatCoreCM.IsDelete == true and _keyPressed == 45 then
+	-- 	local sq, _, objTbl = CheatCoreCM.getSqObjs()
+	--
+	-- 	if not sq or not objTbl then return end
+	-- 	if CheatCoreCM.DeleteWithCorpse then
+	-- 		if sq:getDeadBody() then
+	-- 			sq:removeCorpse(sq:getDeadBody(), false)
+	-- 		end
+	-- 	end
+	--
+	-- 	 if CheatCoreCM.DeleteWithZombie then
+	-- 	 local zombieobject = sq:getZombie()
+	-- 	   if zombieobject then
+	-- 			zombieobject:removeFromWorld()
+	-- 			zombieobject:removeFromSquare()
+	-- 		end
+	-- 	end
+	--
+	-- 	local WindowCheck = 0
+	-- 	for i = 1, #objTbl do
+	-- 		local obj = objTbl[i]
+	-- 		if obj then
+	-- 			local sprite = obj:getSprite()
+	--
+	-- 			local WallCheck = tostring(obj:getType()) or nil
+	--
+	-- 			if instanceof(obj, "IsoDoor") or instanceof(obj, "IsoWindow") or instanceof(obj, "IsoThumpable") then
+	-- 				WindowCheck = 1
+	-- 			else
+	-- 				WindowCheck = 0
+	-- 			end
+	--
+	-- 			if sprite and sprite:getProperties():Is(IsoFlagType.solidfloor) ~= true then
+	-- 				local stairObjects = buildUtil.getStairObjects(obj, false)
+	-- 				if #stairObjects > 0 then
+	-- 					for i=1,#stairObjects do
+	-- 						if isClient() then
+	-- 							sledgeDestroy(stairObjects[i])
+	-- 						else
+	-- 							stairObjects[i]:getSquare():RemoveTileObject(stairObjects[i])
+	-- 						end
+	-- 					end
+	-- 				else
+	-- 					if isClient() then
+	-- 						if (CheatCoreCM.DeleteWithoutWall and WallCheck ~= "wall") and (WindowCheck == 0 and CheatCoreCM.DeleteWithoutDoorWindow) then
+	-- 							sledgeDestroy(obj)
+	-- 						elseif (CheatCoreCM.DeleteWithoutWall and WallCheck ~= "wall") and not CheatCoreCM.DeleteWithoutDoorWindow then
+	-- 							sledgeDestroy(obj)
+	-- 						elseif (WindowCheck == 0 and CheatCoreCM.DeleteWithoutDoorWindow) and not CheatCoreCM.DeleteWithoutWall then
+	-- 							sledgeDestroy(obj)
+	-- 						elseif not CheatCoreCM.DeleteWithoutWall and not CheatCoreCM.DeleteWithoutDoorWindow then
+	-- 							sledgeDestroy(obj)
+	-- 						end
+	-- 					else
+	--
+	-- 						if (CheatCoreCM.DeleteWithoutWall and WallCheck ~= "wall") and (WindowCheck == 0 and CheatCoreCM.DeleteWithoutDoorWindow) then
+	-- 							sq:RemoveTileObject(obj);
+	-- 							--sq:DeleteTileObject​(obj);
+	-- 							sq:getSpecialObjects():remove(obj);
+	-- 							sq:getObjects():remove(obj);
+	-- 						elseif (CheatCoreCM.DeleteWithoutWall and WallCheck ~= "wall") and not CheatCoreCM.DeleteWithoutDoorWindow then
+	-- 							sq:RemoveTileObject(obj);
+	-- 							--sq:DeleteTileObject​(obj);
+	-- 							sq:getSpecialObjects():remove(obj);
+	-- 							sq:getObjects():remove(obj);
+	-- 						elseif (WindowCheck == 0 and CheatCoreCM.DeleteWithoutDoorWindow) and not CheatCoreCM.DeleteWithoutWall then
+	-- 							sq:RemoveTileObject(obj);
+	-- 							--sq:DeleteTileObject​(obj);
+	-- 							sq:getSpecialObjects():remove(obj);
+	-- 							sq:getObjects():remove(obj);
+	-- 						elseif not CheatCoreCM.DeleteWithoutWall and not CheatCoreCM.DeleteWithoutDoorWindow then
+	-- 							sq:RemoveTileObject(obj);
+	-- 							--sq:DeleteTileObject​(obj);
+	-- 							sq:getSpecialObjects():remove(obj);
+	-- 							sq:getObjects():remove(obj);
+	-- 						end
+	-- 					end
+	-- 				end
+	-- 			end
+	-- 		end
+	-- 	end
+	-- end
 
-		if not sq or not objTbl then return end
-		if CheatCoreCM.DeleteWithCorpse then
-			if sq:getDeadBody() then
-				sq:removeCorpse(sq:getDeadBody(), false)
-			end
-		end
-
-		 if CheatCoreCM.DeleteWithZombie then
-		 local zombieobject = sq:getZombie()
-		   if zombieobject then
-				zombieobject:removeFromWorld()
-				zombieobject:removeFromSquare()
-			end
-		end
-
-		local WindowCheck = 0
-		for i = 1, #objTbl do
-			local obj = objTbl[i]
-			if obj then
-				local sprite = obj:getSprite()
-
-				local WallCheck = tostring(obj:getType()) or nil
-
-				if instanceof(obj, "IsoDoor") or instanceof(obj, "IsoWindow") or instanceof(obj, "IsoThumpable") then
-					WindowCheck = 1
-				else
-					WindowCheck = 0
-				end
-
-				if sprite and sprite:getProperties():Is(IsoFlagType.solidfloor) ~= true then
-					local stairObjects = buildUtil.getStairObjects(obj, false)
-					if #stairObjects > 0 then
-						for i=1,#stairObjects do
-							if isClient() then
-								sledgeDestroy(stairObjects[i])
-							else
-								stairObjects[i]:getSquare():RemoveTileObject(stairObjects[i])
-							end
-						end
-					else
-						if isClient() then
-							if (CheatCoreCM.DeleteWithoutWall and WallCheck ~= "wall") and (WindowCheck == 0 and CheatCoreCM.DeleteWithoutDoorWindow) then
-								sledgeDestroy(obj)
-							elseif (CheatCoreCM.DeleteWithoutWall and WallCheck ~= "wall") and not CheatCoreCM.DeleteWithoutDoorWindow then
-								sledgeDestroy(obj)
-							elseif (WindowCheck == 0 and CheatCoreCM.DeleteWithoutDoorWindow) and not CheatCoreCM.DeleteWithoutWall then
-								sledgeDestroy(obj)
-							elseif not CheatCoreCM.DeleteWithoutWall and not CheatCoreCM.DeleteWithoutDoorWindow then
-								sledgeDestroy(obj)
-							end
-						else
-
-							if (CheatCoreCM.DeleteWithoutWall and WallCheck ~= "wall") and (WindowCheck == 0 and CheatCoreCM.DeleteWithoutDoorWindow) then
-								sq:RemoveTileObject(obj);
-								--sq:DeleteTileObject​(obj);
-								sq:getSpecialObjects():remove(obj);
-								sq:getObjects():remove(obj);
-							elseif (CheatCoreCM.DeleteWithoutWall and WallCheck ~= "wall") and not CheatCoreCM.DeleteWithoutDoorWindow then
-								sq:RemoveTileObject(obj);
-								--sq:DeleteTileObject​(obj);
-								sq:getSpecialObjects():remove(obj);
-								sq:getObjects():remove(obj);
-							elseif (WindowCheck == 0 and CheatCoreCM.DeleteWithoutDoorWindow) and not CheatCoreCM.DeleteWithoutWall then
-								sq:RemoveTileObject(obj);
-								--sq:DeleteTileObject​(obj);
-								sq:getSpecialObjects():remove(obj);
-								sq:getObjects():remove(obj);
-							elseif not CheatCoreCM.DeleteWithoutWall and not CheatCoreCM.DeleteWithoutDoorWindow then
-								sq:RemoveTileObject(obj);
-								--sq:DeleteTileObject​(obj);
-								sq:getSpecialObjects():remove(obj);
-								sq:getObjects():remove(obj);
-							end
-						end
-					end
-				end
-			end
-		end
-	end
-
-	if CheatCoreCM.IsTerraforming == true and _keyPressed == 45 then
-		local sq, _, objTbl = CheatCoreCM.getSqObjs()
-
-		--[[
-		if sq == nil then
-			sq = cell:createNewGridSquare(wx, wy, wz)
-			cell:ConnectNewSquare(sq, false)
-		end
-		--]]
-		if not sq or not objTbl then
-			--print("[CHEAT MENU] Attempted to terraform non-existent square")
-			return
-		end
-
-		local rand;
-		if #CheatCoreCM.TerraformRanges > 1 then
-			rand = ZombRand(CheatCoreCM.TerraformRanges[1],CheatCoreCM.TerraformRanges[2] + 1)
-			if CheatCoreCM.BannedRanges ~= nil then
-				for i = 1,#CheatCoreCM.BannedRanges do
-					if rand == CheatCoreCM.BannedRanges[i] then
-						rand = rand + ZombRand(1,2 + 1) <= CheatCoreCM.TerraformRanges[2] or rand - ZombRand(1,2 + 1)
-					end
-				end
-			end
-		else
-			rand = CheatCoreCM.TerraformRanges[1]
-		end
-
-		local generatedTile = CheatCoreCM.Terraform..tostring(rand)
-		local obj;
-		local sprite;
-
-		for i = 1, #objTbl do
-			obj = objTbl[i]
-			if obj then
-				sprite = obj:getSprite()
-
-				if sprite and sprite:getProperties():Is(IsoFlagType.solidfloor) then
-					break
-				end
-			end
-		end
-
-		if sq ~= CheatCoreCM.CM_TempCoord then
-			if not (CheatCoreCM.DoNotFill and not sq:getFloor()) then
-				sq:addFloor(generatedTile)
-				CheatCoreCM.CM_TempCoord = sq
-			end
-		end
-	end
+	-- 停用地形改造功能 UI_CMRB_Terrain_Terraforming
+	-- if CheatCoreCM.IsTerraforming == true and _keyPressed == 45 then
+	-- 	local sq, _, objTbl = CheatCoreCM.getSqObjs()
+	--
+	-- 	--[[
+	-- 	if sq == nil then
+	-- 		sq = cell:createNewGridSquare(wx, wy, wz)
+	-- 		cell:ConnectNewSquare(sq, false)
+	-- 	end
+	-- 	--]]
+	-- 	if not sq or not objTbl then
+	-- 		--print("[CHEAT MENU] Attempted to terraform non-existent square")
+	-- 		return
+	-- 	end
+	--
+	-- 	local rand;
+	-- 	if #CheatCoreCM.TerraformRanges > 1 then
+	-- 		rand = ZombRand(CheatCoreCM.TerraformRanges[1],CheatCoreCM.TerraformRanges[2] + 1)
+	-- 		if CheatCoreCM.BannedRanges ~= nil then
+	-- 			for i = 1,#CheatCoreCM.BannedRanges do
+	-- 				if rand == CheatCoreCM.BannedRanges[i] then
+	-- 					rand = rand + ZombRand(1,2 + 1) <= CheatCoreCM.TerraformRanges[2] or rand - ZombRand(1,2 + 1)
+	-- 				end
+	-- 			end
+	-- 		end
+	-- 	else
+	-- 		rand = CheatCoreCM.TerraformRanges[1]
+	-- 	end
+	--
+	-- 	local generatedTile = CheatCoreCM.Terraform..tostring(rand)
+	-- 	local obj;
+	-- 	local sprite;
+	--
+	-- 	for i = 1, #objTbl do
+	-- 		obj = objTbl[i]
+	-- 		if obj then
+	-- 			sprite = obj:getSprite()
+	--
+	-- 			if sprite and sprite:getProperties():Is(IsoFlagType.solidfloor) then
+	-- 				break
+	-- 			end
+	-- 		end
+	-- 	end
+	--
+	-- 	if sq ~= CheatCoreCM.CM_TempCoord then
+	-- 		if not (CheatCoreCM.DoNotFill and not sq:getFloor()) then
+	-- 			sq:addFloor(generatedTile)
+	-- 			CheatCoreCM.CM_TempCoord = sq
+	-- 		end
+	-- 	end
+	-- end
 end
 
 function CheatCoreCM.OnKeyPressed (_keyPressed, _)
@@ -476,15 +478,16 @@ function CheatCoreCM.OnKeyPressed (_keyPressed, _)
 		end
 	end
 
-	if CheatCoreCM.IsFly == true or getPlayer():getModData().IsFly == true then
-		if CheatCoreCM.FlightHeight == nil then CheatCoreCM.FlightHeight = getPlayer():getZ() end
-
-		if _keyPressed == 200 and getPlayer():getZ() < 5 then
-			CheatCoreCM.FlightHeight = CheatCoreCM.FlightHeight + 1
-		elseif _keyPressed == 208 and getPlayer():getZ() > 0 then
-			CheatCoreCM.FlightHeight = CheatCoreCM.FlightHeight - 1
-		end
-	end
+	-- 停用飞行功能 UI_CMRB_Utility_Fly
+	-- if CheatCoreCM.IsFly == true or getPlayer():getModData().IsFly == true then
+	-- 	if CheatCoreCM.FlightHeight == nil then CheatCoreCM.FlightHeight = getPlayer():getZ() end
+	--
+	-- 	if _keyPressed == 200 and getPlayer():getZ() < 5 then
+	-- 		CheatCoreCM.FlightHeight = CheatCoreCM.FlightHeight + 1
+	-- 	elseif _keyPressed == 208 and getPlayer():getZ() > 0 then
+	-- 		CheatCoreCM.FlightHeight = CheatCoreCM.FlightHeight - 1
+	-- 	end
+	-- end
 end
 
 function CheatCoreCM.RemoveAllZombiesServer()
@@ -656,26 +659,27 @@ function CheatCoreCM.FlyMode()
 	end
 
 	if CheatCoreCM.MasterKey == false then
-		if CheatCoreCM.IsFly == true and CheatCoreCM.FlightHeight ~= nil or getPlayer():getModData().IsFly and CheatCoreCM.FlightHeight ~= nil then
-
-			if CheatCoreCM.FlightHeight ~= OldZ then
-				OldZ = CheatCoreCM.FlightHeight
-				getPlayer():setZ(CheatCoreCM.FlightHeight)
-				getPlayer():setbFalling(false)
-				getPlayer():setFallTime(0)
-				getPlayer():setLastFallSpeed(0)
-			else
-				getPlayer():setbFalling(false)
-				getPlayer():setFallTime(0)
-				getPlayer():setLastFallSpeed(0)
-			end
-			getPlayer():getModData().IsFly = true
-		elseif CheatCoreCM.IsFly == false or getPlayer():getModData().IsFly == false then
-			getPlayer():setbFalling(true)
-			getPlayer():getModData().IsFly = false
-			CheatCoreCM.FlightHeight = getPlayer():getZ()
-			getPlayer():getModData().FlightHeight = CheatCoreCM.FlightHeight
-		end
+		-- 停用飞行功能 UI_CMRB_Utility_Fly
+		-- if CheatCoreCM.IsFly == true and CheatCoreCM.FlightHeight ~= nil or getPlayer():getModData().IsFly and CheatCoreCM.FlightHeight ~= nil then
+		--
+		-- 	if CheatCoreCM.FlightHeight ~= OldZ then
+		-- 		OldZ = CheatCoreCM.FlightHeight
+		-- 		getPlayer():setZ(CheatCoreCM.FlightHeight)
+		-- 		getPlayer():setbFalling(false)
+		-- 		getPlayer():setFallTime(0)
+		-- 		getPlayer():setLastFallSpeed(0)
+		-- 	else
+		-- 		getPlayer():setbFalling(false)
+		-- 		getPlayer():setFallTime(0)
+		-- 		getPlayer():setLastFallSpeed(0)
+		-- 	end
+		-- 	getPlayer():getModData().IsFly = true
+		-- elseif CheatCoreCM.IsFly == false or getPlayer():getModData().IsFly == false then
+		-- 	getPlayer():setbFalling(true)
+		-- 	getPlayer():getModData().IsFly = false
+		-- 	CheatCoreCM.FlightHeight = getPlayer():getZ()
+		-- 	getPlayer():getModData().FlightHeight = CheatCoreCM.FlightHeight
+		-- end
 	end
 end
 

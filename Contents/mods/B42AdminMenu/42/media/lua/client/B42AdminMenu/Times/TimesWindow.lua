@@ -324,12 +324,13 @@ function TimesWindow:new(x, y, width, height)
 	return o;
 end
 
-function TimesWindow.makeWindow()
-	local window = TimesWindow:new(100,100,370,100)
-	-- Change the window's width, height << later job.
-	window:initialise()
-	window:addToUIManager()
-end
+-- 停用时间修改功能 UI_CMRB_Utility_TimeWarp
+-- function TimesWindow.makeWindow()
+-- 	local window = TimesWindow:new(100,100,370,100)
+-- 	-- Change the window's width, height << later job.
+-- 	window:initialise()
+-- 	window:addToUIManager()
+-- end
 
 function TimeBox:initialise()
 	ISPanel.initialise(self);

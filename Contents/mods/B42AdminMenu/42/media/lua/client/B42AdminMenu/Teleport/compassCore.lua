@@ -55,7 +55,7 @@ end
 function compassCore.processJson(update)
 	compassCore.locations = {}
 
-	local success, mapData = pcall(require, "CheatMenuPhoenix/Teleport/maplocations_raw")
+	local success, mapData = pcall(require, "B42AdminMenu/Teleport/maplocations_raw")
 
 	if not success or not mapData then
 		print("ERROR -> Could not load maplocations_raw")
@@ -80,7 +80,7 @@ function compassCore.processJson(update)
 
 	setmetatable(compassCore.locations, { ["__index"] = {["size"] = inc + 1} })
 
-	local success2, customData = pcall(require, "CheatMenuPhoenix/Teleport/customlocations_raw")
+	local success2, customData = pcall(require, "B42AdminMenu/Teleport/customlocations_raw")
 	compassCore.locations["Custom"] = {}
 	if success2 and customData then
 		compassCore.locations["Custom"]["pois"] = customData

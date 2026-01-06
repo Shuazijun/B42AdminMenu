@@ -346,7 +346,7 @@ function CheatCoreCM.OnKeyKeepPressed(_keyPressed)
 	-- 	end
 	-- 	--]]
 	-- 	if not sq or not objTbl then
-	-- 		--print("[CHEAT MENU] Attempted to terraform non-existent square")
+	-- 		--print("[ADMIN MENU] Attempted to terraform non-existent square")
 	-- 		return
 	-- 	end
 	--
@@ -534,9 +534,9 @@ end
 function CheatCoreCM.updateCoords()
 	---@diagnostic disable-next-line: undefined-field
 	if GPSWindow:isVisible() then
-		GPSWindow.compassLines[1] = getText("UI_CMRB_GPS_TargetLocation").."<LINE>"..CheatCoreCM.DisplayName.." <LINE> ".."X: "..CheatCoreCM.MarkedX.." Y: "..CheatCoreCM.MarkedY.." <LINE><LINE> "
-		GPSWindow.compassLines[2] = getText("UI_CMRB_GPS_CurrentCoord").."<LINE> ".."X: "..CheatCoreCM.doRound(getPlayer():getX()).." Y: "..CheatCoreCM.doRound(getPlayer():getY()).." <LINE><LINE> "
-		GPSWindow.compassLines[3] = getText("UI_CMRB_GPS_TargetDistance").." <LINE> ".."X: "..CheatCoreCM.checkCoords(tonumber(CheatCoreCM.MarkedX), getPlayer():getX()).." Y: "..CheatCoreCM.checkCoords(tonumber(CheatCoreCM.MarkedY), getPlayer():getY())..""
+		GPSWindow.compassLines[1] = getText("UI_CMRB_GPS_TargetLocation").."<LINE>"..CheatCoreCM.DisplayName.." <LINE> ".."X: "..CheatCoreCM.MarkedX.." Y: "..CheatCoreCM.MarkedY.." Z: "..(CheatCoreCM.MarkedZ or 0).." <LINE><LINE> "
+		GPSWindow.compassLines[2] = getText("UI_CMRB_GPS_CurrentCoord").."<LINE> ".."X: "..CheatCoreCM.doRound(getPlayer():getX()).." Y: "..CheatCoreCM.doRound(getPlayer():getY()).." Z: "..CheatCoreCM.doRound(getPlayer():getZ()).." <LINE><LINE> "
+		GPSWindow.compassLines[3] = getText("UI_CMRB_GPS_TargetDistance").." <LINE> ".."X: "..CheatCoreCM.checkCoords(tonumber(CheatCoreCM.MarkedX), getPlayer():getX()).." Y: "..CheatCoreCM.checkCoords(tonumber(CheatCoreCM.MarkedY), getPlayer():getY()).." Z: "..CheatCoreCM.checkCoords(tonumber(CheatCoreCM.MarkedZ or 0), getPlayer():getZ())..""
 		CheatCoreCM.updateCompass()
 	end
 end
@@ -881,12 +881,12 @@ function CheatCoreCM.dragDownDisable()
 			if DragdownCheck == true then
 				getPlayer():getModData().CMmodifiedSB = true
 				sb:set("ZombieLore.ZombiesDragDown", false);
-				-- print("[CHEAT MENU] ZombiesDragDown set to False to prevent God Mode instadeath")
+				-- print("[ADMIN MENU] ZombiesDragDown set to False to prevent God Mode instadeath")
 			end
 		elseif getPlayer():getModData().CMmodifiedSB == true then
 			getPlayer():getModData().CMmodifiedSB = false
 			sb:set("ZombieLore.ZombiesDragDown", true)
-			-- print("[CHEAT MENU] God Mode disabled, ZombiesDragDown value restored to True")
+			-- print("[ADMIN MENU] God Mode disabled, ZombiesDragDown value restored to True")
 		end
 	end
 end
@@ -1893,7 +1893,7 @@ function CheatCoreCM.SyncVariables()
 					stringNotice = stringNotice..finishedString
 				end
 			end
-			print("[CHEAT MENU] "..stringNotice)
+			print("[ADMIN MENU] "..stringNotice)
 			getPlayer():Say(stringNotice)
 		end
 	end
@@ -1924,7 +1924,7 @@ Events.OnEquipPrimary.Add(CheatCoreCM.CheckEquipment);
 Events.OnTick.Add(CheatCoreCM.UpdateGhostZombies);
 Events.OnPlayerUpdate.Add(CheatCoreCM.DoStatsUpdate);
 
-print("[CHEAT MENU] CheatCore successfully loaded")
+print("[ADMIN MENU] CheatCore successfully loaded")
 
 -- ░░ Override to disable buggy per-tick cheats ░░
 function CheatCoreCM.DoTickCheats()

@@ -1,8 +1,10 @@
 name=B42AdminMenu
-description=Cheat for everything, Cheat for your life. <br>
+description=CM修改版本,已停用多人模式下不兼容的功能模块.
 id=B42AdminMenu
 poster=logo.png
 icon=logo-mini.png
-modversion=1.0.0
-authors=Shuazi
+modversion=1.0
+author=Shuazi
+versionMin=42.13.0
+versionMax=42.13.1
 tags=Cheat, Tools

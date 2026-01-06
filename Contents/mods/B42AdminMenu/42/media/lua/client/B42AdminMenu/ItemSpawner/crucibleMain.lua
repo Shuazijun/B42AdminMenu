@@ -132,7 +132,7 @@ function crucibleUI:createChildren()
 
 	--[[
 	function self.sortBtn:onMouseDown()
-		--local crucibleAmountUI = crucibleAmountWindow:checkExists(getText("UI_CMRB_ItemSpawner_AmountWindow"), "ItemSpawner_AmountWindow", function() print("[Cheat Menu] Error generating inputUI") end, nil)
+		--local crucibleAmountUI = crucibleAmountWindow:checkExists(getText("UI_CMRB_ItemSpawner_AmountWindow"), "ItemSpawner_AmountWindow", function() print("[ADMIN MENU] Error generating inputUI") end, nil)
 		--crucibleAmountUI:setVisible(true)
 	end
 	--]]

@@ -43,7 +43,7 @@ function ISUILuaWindow:initialise()
 	self.pathBar:setVisible(false);
 	self:addChild(self.pathBar);
 
-	local mod = getModInfoByID("CheatMenuPX")
+	local mod = getModInfoByID("B42AdminMenu")
 	local destPath = ""
 	if mod then
 		destPath = mod:getDir().."\\user_lua\\"
@@ -145,9 +145,9 @@ function ISUILuaWindow.portLua(mode, noStart, doNotCheck)
 	end
 
 	if noStart ~= true then
-		local mod = getModInfoByID("CheatMenuPX")
+		local mod = getModInfoByID("B42AdminMenu")
 		if not mod then
-			print("[CHEAT MENU] Error -> Mod not found!")
+			print("[ADMIN MENU] Error -> Mod not found!")
 			return false
 		end
 		local destPath = mod:getDir().."\\user_lua\\"..ISUILuaWindow.pathBar:getText() -- for the user to look at
@@ -161,13 +161,13 @@ function ISUILuaWindow.portLua(mode, noStart, doNotCheck)
 			end
 			if doNotCheck ~= true then
 				if fileExists(destPath) then
-					print("[CHEAT MENU] FILE "..destPath.." ALREADY EXISTS! Prompting user to overwrite.")
+					print("[ADMIN MENU] FILE "..destPath.." ALREADY EXISTS! Prompting user to overwrite.")
 					ISUILuaWindow.confirmBox:setVisible(true)
 					return false
 				end
 			end
 			CheatCoreCM.writeFile(strTable, "CheatMenuPX", destPath2)
-			print("[CHEAT MENU] File successfully written!")
+			print("[ADMIN MENU] File successfully written!")
 		elseif ISUILuaWindow.mode == "import" then -- otherwise, commence import actions
 			if fileExists(destPath) then -- check if the file exists first, to prevent errors and to prevent readFile from creating a new file
 				local fileT = CheatCoreCM.readFile("CheatMenuPX", destPath2) -- CheatCoreCM.readFile returns table of file, line by line.
@@ -175,9 +175,9 @@ function ISUILuaWindow.portLua(mode, noStart, doNotCheck)
 				for i = 1,#fileT do
 					ISUILuaWindow.LuaBar:setText(ISUILuaWindow.LuaBar:getText()..fileT[i].."\n")
 				end
-				print("[CHEAT MENU] File successfully imported!") -- inform user in console if successful
+				print("[ADMIN MENU] File successfully imported!") -- inform user in console if successful
 			else
-				print("[CHEAT MENU] Error -> file does not exist!") -- or if unsuccessful.
+				print("[ADMIN MENU] Error -> file does not exist!") -- or if unsuccessful.
 			end
 		end
 	end

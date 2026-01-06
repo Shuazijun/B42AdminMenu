@@ -1,4 +1,4 @@
-local dataContent = require("CheatMenuPhoenix/Teleport/maplocations_raw")
+local dataContent = require("B42AdminMenu/Teleport/maplocations_raw")
 if type(dataContent) == "string" then
 	local func = loadstring("return " .. dataContent)
 	if func then

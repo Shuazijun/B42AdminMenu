@@ -15,7 +15,7 @@ function GPSWindow:new(x, y, width, height)
 	o = ISCollapsableWindow:new(x, y, width, height);
 	setmetatable(o, self);
 	self.__index = self;
-	o.title = "GPS";
+	o.title = getText("UI_CMRB_TeleportLocation_GPS");
 	o.pin = false;
 	o:noBackground();
 	return o;

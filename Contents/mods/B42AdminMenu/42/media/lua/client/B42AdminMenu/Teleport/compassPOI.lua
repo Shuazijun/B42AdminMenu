@@ -84,11 +84,11 @@ function compassPOI:makeChildren()
 end
 
 function compassPOI:teleport()
-	print("[CHEAT MENU] compassPOI teleport() called")
+	print("[ADMIN MENU] compassPOI teleport() called")
 	local x = self.poi["x"]
 	local y = self.poi["y"]
 	local z = self.poi["z"] or 0
-	print("[CHEAT MENU] POI data - x=" .. x .. ", y=" .. y .. ", z=" .. z)
+	print("[ADMIN MENU] POI data - x=" .. x .. ", y=" .. y .. ", z=" .. z)
 
 	if getWorld():isValidSquare(math.floor(x), math.floor(y), math.floor(z)) == false then
 		getPlayer():Say(getText("UI_CMRB_Message_TeleportUnsafe_OuterBorder"))
@@ -97,7 +97,7 @@ function compassPOI:teleport()
 		getPlayer():Say(getText("UI_CMRB_Message_TeleportUnsafe_NoChunkData"))
 		getWorld():update()
 	else
-		print("[CHEAT MENU] Teleporting to " .. x .. ", " .. y .. ", " .. (z or 0))
+		print("[ADMIN MENU] Teleporting to " .. x .. ", " .. y .. ", " .. (z or 0))
 		if isClient() then
 			if z ~= nil then
 				SendCommandToServer("/teleportto " .. x .. "," .. y .. ","..z)

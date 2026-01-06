@@ -302,7 +302,7 @@ function ISUICheatMenu:createXPMenu(subMenu)
 		context:addSubMenu(option, subMenuOption);
 
 		for key,val in pairs(v) do
-		local inputUI = SkillInputWindow:checkExists(getText("UI_CMRB_MoodAndXP_SkillWindow"), "XP_Value", function() print("[Cheat Menu] Error generating inputUI") end, nil)
+		local inputUI = SkillInputWindow:checkExists(getText("UI_CMRB_MoodAndXP_SkillWindow"), "XP_Value", function() print("[ADMIN MENU] Error generating inputUI") end, nil)
 			subMenuOption:addOption(key, worldobjects, function() inputUI.title = tostring(key).. " " .. getText("UI_CMRB_MoodAndXP_SkillWindow") inputUI:setVisible(true); inputUI.func = function(val2) CheatCoreCM.DoSkillLevelUp(val, tonumber(val2)) end end)
 		end
 	end
@@ -572,7 +572,7 @@ function ISUICheatMenu:createVehicleMenu(subMenu)
 
 	local SelectVehicleOption = subMenuVehicle:addOption(getText("UI_CMRB_Utility_VehicleSpawnerWindow"), worldobjects, VehicleSpawnCore.makeWindow);
 
-	local vehicleControl = VehicleControlWindow:checkExists(getText("UI_CMRB_VehicleControlWindow"), "Vehicle_Control", function() getPlayer():Say(getText("UI_CMRB_Message_AlreadyExistWindow")); print("[Cheat Menu] Error generating inputUI") end, nil)
+	local vehicleControl = VehicleControlWindow:checkExists(getText("UI_CMRB_VehicleControlWindow"), "Vehicle_Control", function() getPlayer():Say(getText("UI_CMRB_Message_AlreadyExistWindow")); print("[ADMIN MENU] Error generating inputUI") end, nil)
 	local VehicleControlOption = subMenuVehicle:addOption(getText("UI_CMRB_Utility_VehicleControl"), worldobjects, function() if vehicleControl then vehicleControl:setVisible(true) end end)
 
 	if CheatCoreCM.IsReady == true then
@@ -590,7 +590,7 @@ function ISUICheatMenu:createVehicleMenu(subMenu)
 				subMenuVehicle.options[i] = nil 
 			end
 		end
-		local inputUI = ISUIGenericWindow:checkExists(getText("UI_CMRB_Utility_VehicleSetValueWindow"), "Vehicle_Value", function() print("[Cheat Menu] Error generating inputUI") end, nil)
+		local inputUI = ISUIGenericWindow:checkExists(getText("UI_CMRB_Utility_VehicleSetValueWindow"), "Vehicle_Value", function() print("[ADMIN MENU] Error generating inputUI") end, nil)
 
 		-- FIXME: spaghetti
 		for k,v in pairs(CheatCoreCM.Parts) do
@@ -787,7 +787,7 @@ function ISUICheatMenu:CharacterCheatMenu()
 		Ghost.checkMark = false
 	end
 
-	--[[
+
 	local NoClip = subMenuCharacter:addOption(getText("UI_CMRB_Character_Noclip"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Character_Noclip"), "CheatCoreCM.IsNoClip") CheatCoreCM.DoNoClipMode() end);
 
 	if CheatCoreCM.IsNoClip then
@@ -795,7 +795,7 @@ function ISUICheatMenu:CharacterCheatMenu()
 	else
 		NoClip.checkMark = false
 	end
-	]]
+
 
 	local PreventDeath = subMenuCharacter:addOption(getText("UI_CMRB_Character_PreventDeath"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Character_PreventDeath"), "CheatCoreCM.DoPreventDeath") CheatCoreCM.DoPreventDeathMode() end);
 
@@ -953,16 +953,19 @@ function ISUICheatMenu:UtilityCheatMenu()
 	context:addSubMenu(UtilityCheatOption, subMenuUtility);
 	subMenuUtility.tickTexture = getTexture(ISUICheatMenu.MenuTexture.on)
 
-	ISUICheatMenu:createTimeMenu(subMenuUtility)
+	-- 停用时间菜单 UI_CMRB_Utility_Time
+	-- ISUICheatMenu:createTimeMenu(subMenuUtility)
 	ISUICheatMenu:createVehicleMenu(subMenuUtility)
 
-	subMenuUtility:addOption(getText("UI_CMRB_Utility_Weather"), worldobjects, function() local ui = ISAdminWeather.OnOpenPanel(); ui:onMadeActive() end);
+	-- 停用天气功能 UI_CMRB_Utility_Weather
+	-- subMenuUtility:addOption(getText("UI_CMRB_Utility_Weather"), worldobjects, function() local ui = ISAdminWeather.OnOpenPanel(); ui:onMadeActive() end);
 
 	subMenuUtility:addOption(getText("UI_CMRB_Utility_TeleportLocation"), worldobjects, compassCore.makeWindow);
 	subMenuUtility:addOption(getText("UI_CMRB_Utility_TeleportCoord"), worldobjects, TeleportWindow.makeWindow);
 
 	---@diagnostic disable-next-line: undefined-field
-	subMenuUtility:addOption(getText("UI_CMRB_Utility_LuaEditor"), worldobjects, function() ISUILuaWindow.SetupBar() end);
+	-- 停用 Lua 编辑器功能 UI_CMRB_Utility_LuaEditor
+	-- subMenuUtility:addOption(getText("UI_CMRB_Utility_LuaEditor"), worldobjects, function() ISUILuaWindow.SetupBar() end);
 	-- 停用飞行功能 UI_CMRB_Utility_Fly
 	-- local Fly = subMenuUtility:addOption(getText("UI_CMRB_Utility_Fly"), worldobjects, function() CheatCoreCM.HandleToggle(getText("UI_CMRB_Utility_Fly_Message"), "CheatCoreCM.IsFly") end);
 	-- 	if CheatCoreCM.IsFly then
@@ -1060,7 +1063,7 @@ function ISUICheatMenu.PrivilegeCheck()
 					CheatCoreCM.SyncVariables()
 					local Username = getOnlineUsername()
 					if Username ~= nil then
-						print("[CHEAT MENU] User "..Username.." is authorized! This message will appear the next time the client connects.")
+						print("[ADMIN MENU] User "..Username.." is authorized! This message will appear the next time the client connects.")
 					end
 					ISUICheatMenu.AdminTrigger = 1
 				end
@@ -1076,7 +1079,7 @@ function ISUICheatMenu.PrivilegeCheck()
 					CheatCoreCM.SyncVariables()
 					local Username = getOnlineUsername()
 					if Username ~= nil then
-						print("[CHEAT MENU] User "..Username.." is authorized! This message will appear the next time the client connects.")
+						print("[ADMIN MENU] User "..Username.." is authorized! This message will appear the next time the client connects.")
 					end
 					ISUICheatMenu.AdminTrigger = 1
 				end
@@ -1104,7 +1107,7 @@ function ISUICheatMenu.PrivilegeCheck()
 					CheatCoreCM.SyncVariables()
 					local Username = getOnlineUsername()
 					if Username ~= nil then
-						print("[CHEAT MENU] User "..Username.." is authorized! This message will appear the next time the client connects.")
+						print("[ADMIN MENU] User "..Username.." is authorized! This message will appear the next time the client connects.")
 					end
 					ISUICheatMenu.AdminTrigger = 1
 
@@ -1128,7 +1131,7 @@ function ISUICheatMenu.PrivilegeCheck()
 			ISUICheatMenu.EventsAdd()
 			local Username = getOnlineUsername()
 			if Username ~= nil then
-				print("[CHEAT MENU] User "..Username.." is authorized! This message will appear the next time the client connects.")
+				print("[ADMIN MENU] User "..Username.." is authorized! This message will appear the next time the client connects.")
 			end
 			ISUICheatMenu.AdminTrigger = 1
 		end
@@ -1161,4 +1164,4 @@ end
 
 Events.OnLoad.Add(ISUICheatMenu.CoreEvents)
 
-print("[CHEAT MENU] ISUICheatMenu successfully loaded")
+print("[ADMIN MENU] ISUICheatMenu successfully loaded")

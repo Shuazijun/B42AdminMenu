@@ -35,7 +35,7 @@ function TeleportWindow:initialise()
 end
 
 function TeleportWindow.Teleport(Teleport_X, Teleport_Y, Teleport_Z)
-	print("[CHEAT MENU] TeleportWindow.Teleport() called with X=" .. Teleport_X .. ", Y=" .. Teleport_Y .. ", Z=" .. Teleport_Z)
+	print("[ADMIN MENU] TeleportWindow.Teleport() called with X=" .. Teleport_X .. ", Y=" .. Teleport_Y .. ", Z=" .. Teleport_Z)
 	if isClient() then
 		SendCommandToServer("/teleportto " .. Teleport_X .. "," .. Teleport_Y .. ","..Teleport_Z);
 	else
